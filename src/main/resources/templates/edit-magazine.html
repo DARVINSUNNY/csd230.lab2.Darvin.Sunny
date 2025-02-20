@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Magazine</title>
+  <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+  <h1>Simple E-Commerce</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/magazines">Magazines</a>
+    <a href="/cart">Cart</a>
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Sign Out"/>
+    </form>
+  </nav>
+</header>
+<main>
+  <h2>Edit Magazine</h2>
+  <form th:action="@{/magazines/edit}" th:object="${magazine}" method="post">
+    <table>
+      <tr>
+        <td>ID:</td>
+        <td><input type="text" th:field="*{id}" readonly/></td>
+      </tr>
+      <tr>
+        <td>Title:</td>
+        <td><input type="text" th:field="*{title}" /></td>
+      </tr>
+      <tr>
+        <td>Order Quantity:</td>
+        <td><input type="number" th:field="*{orderQty}" /></td>
+      </tr>
+      <tr>
+        <td>Issue Date:</td>
+        <td><input type="date" th:field="*{currIssue}" /></td>
+      </tr>
+      <tr>
+        <td>ISBN:</td>
+        <td><input type="text" th:field="*{isbn}" /></td>
+      </tr>
+      <tr>
+        <td>Publisher:</td>
+        <td><input type="text" th:field="*{publisher}" /></td>
+      </tr>
+    </table>
+    <p>
+      <input type="submit" value="Save Changes"/>
+    </p>
+  </form>
+</main>
+<footer>
+  <p>&copy; 2024 Simple E-Commerce. All rights reserved.</p>
+</footer>
+</body>
+</html>

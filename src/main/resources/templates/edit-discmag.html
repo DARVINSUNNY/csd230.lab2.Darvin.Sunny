@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Disc Magazine</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <h1>Simple E-Commerce</h1>
+    <nav>
+        <a th:href="@{/static}">Home</a>
+        <a th:href="@{/discmags}">Disc Magazines</a>
+        <a th:href="@{/cart}">Cart</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out" />
+        </form>
+    </nav>
+</header>
+<main>
+    <h2>Edit Disc Magazine</h2>
+    <form th:action="@{/discmags/edit}" th:object="${discMag}" method="post">
+        <table>
+            <tr>
+                <td>ID:</td>
+                <td><input type="text" th:field="*{id}" readonly/></td>
+            </tr>
+            <tr>
+                <td>Title:</td>
+                <td><input type="text" th:field="*{title}" /></td>
+            </tr>
+            <tr>
+                <td>Has Disc?</td>
+                <td>
+                    <input type="checkbox" th:field="*{hasDisc}" />
+                </td>
+            </tr>
+        </table>
+        <p>
+            <input type="submit" value="Save Changes" />
+        </p>
+    </form>
+</main>
+<footer>
+    <p>&copy; 2024 Simple E-Commerce. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple E-Commerce - Tickets</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <h1>Simple E-Commerce</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/tickets">Tickets</a>
+        <a href="/cart">Cart</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </nav>
+</header>
+<main>
+    <h2>Tickets List</h2>
+    <p><a th:href="@{/tickets/add}">Add New Ticket</a></p>
+    <form th:action="@{/tickets/selection}" method="post" th:object="${ticketSelection}">
+        <table border="1" cellpadding="5" cellspacing="0">
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Text</th>
+                <th>Edit</th>
+                <th>Select</th>
+            </tr>
+            <tr th:each="ticket : ${tickets}">
+                <td th:text="${ticket.id}"></td>
+                <td th:text="${ticket.description}"></td>
+                <td th:text="${ticket.price}"></td>
+                <td th:text="${ticket.text}"></td>
+                <td><a th:href="@{/tickets/edit(id=${ticket.id})}">Edit</a></td>
+                <td><input type="checkbox" th:value="${ticket.id}" name="selectedTickets"/></td>
+            </tr>
+        </table>
+        <p>
+            <button type="submit" name="action" value="delete">Delete Selected Tickets</button>
+            <button type="submit" name="action" value="addToCart">Add Selected to Cart</button>
+        </p>
+    </form>
+</main>
+<footer>
+    <p>&copy; 2024 Simple E-Commerce. All rights reserved.</p>
+</footer>
+</body>
+</html>

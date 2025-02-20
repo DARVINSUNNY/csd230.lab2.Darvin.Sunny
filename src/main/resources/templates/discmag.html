@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple E-Commerce - Disc Magazines</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <h1>Simple E-Commerce</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/discmags">Disc Magazines</a>
+        <a href="/cart">Cart</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </nav>
+</header>
+<main>
+    <h2>Disc Magazines List</h2>
+    <p><a th:href="@{/discmags/add}">Add New Disc Magazine</a></p>
+    <form th:action="@{/discmags/selection}" method="post" th:object="${discMagSelection}">
+        <table border="1" cellpadding="5" cellspacing="0">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Has Disc?</th>
+                <th>Edit</th>
+                <th>Select</th>
+            </tr>
+            <tr th:each="discmag : ${discmags}">
+                <td th:text="${discmag.id}"></td>
+                <td th:text="${discmag.title}"></td>
+                <td th:text="${discmag.hasDisc}"></td>
+                <td><a th:href="@{/discmags/edit(id=${discmag.id})}">Edit</a></td>
+                <td><input type="checkbox" th:value="${discmag.id}" name="selectedDiscMags"/></td>
+            </tr>
+        </table>
+        <p>
+            <button type="submit" name="action" value="delete">Delete Selected Disc Magazines</button>
+            <button type="submit" name="action" value="addToCart">Add Selected to Cart</button>
+        </p>
+    </form>
+</main>
+<footer>
+    <p>&copy; 2024 Simple E-Commerce. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart Items</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <h1>Simple E-Commerce</h1>
+    <nav>
+        <a th:href="@{/static}">Home</a>
+        <a th:href="@{/cart}">Cart</a>
+        <a th:href="@{/cartitems}">Cart Items</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out" />
+        </form>
+    </nav>
+</header>
+<main>
+    <h2>Cart Items List</h2>
+    <p><a th:href="@{/cartitems/add}">Add New Cart Item</a></p>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="item : ${cartItems}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.description}"></td>
+            <td th:text="${item.price}"></td>
+            <td th:text="${item.quantity}"></td>
+            <td><a th:href="@{/cartitems/edit(id=${item.id})}">Edit</a></td>
+            <td>
+                <form th:action="@{/cartitems/delete}" method="post">
+                    <input type="hidden" name="id" th:value="${item.id}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</main>
+<footer>
+    <p>&copy; 2024 Simple E-Commerce. All rights reserved.</p>
+</footer>
+</body>
+</html>
